@@ -1,4 +1,4 @@
-#make a stupid playlist on youtube and download it as mp3 hhhhhh
+#make a stupid playlist on youtube with the musics u want and download it as mp3 hhhhhh
 # MAKE THE PLAYLIST PUBLIC FOR GODS SAKE !!!!!!!!!!!!
 
 import os
