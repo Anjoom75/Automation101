@@ -10,19 +10,19 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 
-# --- CONFIGURATION ---
-URL = "https://easycollegemate.com/ecmngdc/result"
-START_ID = 20231217
-END_ID = 20231670                               # s - 656 , c - 332, a - 310
-EXAM_NAME = "Test Examination"  # Make sure this matches the website exactly
-LEVEL_NAME = "HSC 2nd Year"         # Make sure this matches the website exactly
+# CONFIGURATION 
+URL = ""
+START_ID = 0 
+END_ID = 0                               # s - 656 , c - 332, a - 310
+EXAM_NAME = "Test Examination" 
+LEVEL_NAME = "HSC 2nd Year"         
 
-# Automatically find your Documents folder
+# dutomatically find your documents folder
 documents_path = os.path.join(os.path.expanduser("~"), "Documents", "NGDC_Results")
 if not os.path.exists(documents_path):
     os.makedirs(documents_path)
 
-# --- BROWSER SETUP ---
+# BROWSER SETUP 
 chrome_options = Options()
 prefs = {
     "download.default_directory": documents_path, # Saves directly to Documents/NGDC_Results
@@ -33,27 +33,28 @@ prefs = {
 chrome_options.add_experimental_option("prefs", prefs)
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
 
-# --- THE DOWNLOAD LOOP ---
+#DOWNLOAD LOOP
 for std_id in range(START_ID, END_ID + 1):
     print(f"Downloading ID: {std_id}...")
     driver.get(URL)
-    time.sleep(.25) # Small pause for stability
+    time.sleep(.25) 
 
     try:
-        # 1. Enter ID
+        # 1 enter ID
         driver.find_element(By.NAME, "student_id").send_keys(str(std_id))
 
-        # 2. Select Level
+        # 2 select Level
         level_dropdown = Select(driver.find_element(By.NAME, "level"))
         level_dropdown.select_by_visible_text(LEVEL_NAME)
 
-        # 3. Select Exam
+        # 3 select Exam
         exam_dropdown = Select(driver.find_element(By.NAME, "exam_id"))
         exam_dropdown.select_by_visible_text(EXAM_NAME)
         #time.sleep(.5)
        
         # 4. Click View Result (This triggers the download)
         #driver.find_element(By.ID, "btnView").click()
+        
         driver.find_element(By.XPATH, "//button[contains(text(), 'Search')]").click()
         time.sleep(.5)
 
@@ -77,10 +78,9 @@ for std_id in range(START_ID, END_ID + 1):
         """"download_btn = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'Download Transcript')]")))
         download_btn.click()"""
 
-        # 6. Wait for the file to land in the folder
         time.sleep(.67)
        
-        # Find the most recently downloaded file and rename it to the ID
+     
         """files = [f for f in os.listdir(documents_path) if f.endswith(".pdf")]
         if files:
             # Sort by time to find the newest one

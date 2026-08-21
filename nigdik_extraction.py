@@ -2,10 +2,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 
-# 1. Setup the figure and axes
+# 1. setup the figure and axes
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 6))
 
-# Left plot: The Locus (Coordinate Plane)
+# left plot: The locus (coordinate Plane)
 ax1.set_xlim(-1, 1)
 ax1.set_ylim(-1, 1)
 ax1.set_aspect('equal')
@@ -14,26 +14,26 @@ ax1.grid(True)
 line, = ax1.plot([], [], 'g-', alpha=0.3)  # The trail
 point, = ax1.plot([], [], 'ro')            # The current (x, y) point
 
-# Right plot: The Chart (Data readout)
+# right plot: The Chart (Data readout)
 ax2.axis('off')
 table_text = ax2.text(0.1, 0.5, '', fontsize=12, family='monospace')
 
-# Data storage
+# data storage
 x_data, y_data = [], []
 
 def update(a):
-    # The "Code" for x and y
+    # the "code" for x and y
     x = (3/4) * np.cos(3 * a)
     y = -(3/4) * np.sin(3 * a)
    
     x_data.append(x)
     y_data.append(y)
    
-    # Update the animation
+    # update the animation
     line.set_data(x_data, y_data)
     point.set_data([x], [y])
    
-    # Update the Real-Time Chart
+    # update the real-Time chart
     display_text = (
         f"Time (a): {a:.2f}\n\n"
         f"X-Position (Left/Right): {x: .4f}\n"
@@ -45,7 +45,7 @@ def update(a):
    
     return line, point, table_text
 
-# Animate over 'a' from 0 to 2*pi
+# animates over 'a' from 0 to 2*pi
 ani = FuncAnimation(fig, update, frames=np.linspace(0, 2*np.pi, 120),
                     interval=50, blit=True)
 
