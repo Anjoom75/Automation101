@@ -5,9 +5,9 @@ import os
 import yt_dlp
 
 
-# Paste your YouTube playlist link or individual video links here
+# paste your youtube playlist links or individual video links here
 URLS = [
-    "https://www.youtube.com/watch?v=_eACTXi1DTc&list=PLK1zi0okv7QI"
+    "https://www.youtube.com/watch?v=wmPy8-tRXlI&list=PLeXG1JK9gqjpLbV0fyxgTcwWf1rEVYfsc"
 ]
 
 # name of the folder where your MP3s will be saved
@@ -35,7 +35,7 @@ def download_audio(urls, output_folder):
         ydl.download(urls)
     
     print("\nAll done! Check your music folder.")
-
+ 
 if __name__ == "__main__":
     download_audio(URLS, DOWNLOAD_FOLDER)
 
